@@ -1,0 +1,106 @@
+<DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PJ - Pokedex</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      #pokeDex{
+        font-family:"Pokemon Solid";
+      }
+    </style>
+  </head>
+  <body
+    class=" w-[100%] h-[100vh] bg-zinc-900 flex items-center justify-center font-Nunito"
+  >
+    <!-- Main Parent -->
+    <div
+      class="w-[20rem] h-[39rem] bg-black rounded-2xl overflow-hidden border-3 border-zinc-600"
+    >
+      <!-- Image Tag Div -->
+      <div
+      id="pokemonImageBackground"
+        class="w-inherit h-[47%] rounded-bl-[3rem] rounded-br-[3rem] flex items-center relative px-[1rem]"
+      >
+        <!-- Input for pokemon -->
+        <!-- form of getting data -->
+        <form
+          class="w-[90%] h-9 absolute top-1 left-[50%] -translate-x-[50%] flex items-center justify-between"
+        >
+          <input id="userInputPokemon" class="w-[75%]  px-2 border-1 rounded-[0.2rem] font-semibold outline-none text-white" type="text" placeholder="Enter Pokemon Name/ID" />
+          <button class="bg-white h-6 w-[22%] font-bold rounded-[0.3rem] cursor-pointer 
+          font-bold text-black transition-all duration-300 ease-in-out bg-gradient-to-r from-purple-200 to-indigo-500 shadow-lg hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white">Fetch</button>
+        </form>
+        <!-- Below Input things -->
+        <h3 id="pokeDex"
+          class="absolute top-[25%] left-[50%] -translate-[50%] text-1xl text-white font-bold flex items-center cursor-pointer"
+        >
+          <img src="/STATIC/Pokemon.png" alt="Pokemon" class="w-20 h-20 mr-2" />
+        </h3>
+        <div class="w-[60%] h-[60%] absolute top-[65%] left-[50%] -translate-[50%] flex items-center justify-center ">
+            <img id="pokemonImage" class="w-[100%] h-[100%] " src="" alt="pokemon image"
+            onerror="this.onerror=null; this.src='/STATIC/noImage.svg';"
+            />
+            <div id="pokemon-loader" class="hidden flex justify-center items-center h-screen animate-spin">
+              <div class="pokemon-ball">
+                <div class="top-half"></div>
+                <div class="bottom-half"></div>
+                <div class="center"></div>
+              </div>
+            </div>
+            
+            
+        </div>
+            <p id="pokemonId" class="absolute top-12 right-3 font-bold text-white text-3xl">#4</p>
+      </div>
+
+      <!-- Name And Below Div -->
+      <div class="text-center font-bold text-2xl">
+        <p id="pokemonName" class="text-white"></p>
+      </div>
+      <!-- Type Of Pokemon Div -->
+      <div id="pokemonType" class="w-[100%] flex align-center justify-center mt-2 gap-5">
+       
+      </div>
+      <!-- Weight/Height -->
+      <div class="w-[100%] flex items-center justify-center gap-10">
+        <div class="left__div__weight text-center flex items-center justify-center w-[5rem] h-[5rem] gap-1 flex-col"
+        >
+        <!-- Weight -->
+          <p  id="pokemonWeight" class="font-bold text-white text-xl"></p>
+          <p class="font-medium text-zinc-600">Weight</p>
+        </div>
+        <div
+          class="right__div_height text-center flex items-center justify-center w-[5rem] h-[5rem] gap-1 flex-col"
+        >
+        <!-- Height -->
+          <p id="pokemonHeight"  class="font-bold text-white text-xl"></p>
+          <p class="font-medium text-zinc-600">Height</p>
+        </div>
+      </div>
+      <!-- Stats Div -->
+      <div class="text-center flex flex-col items-center justify-center gap-2">
+        <p class="text-white font-bold text-xl">Base Stats</p>
+        <!-- Stat Range Starts -->
+        <div
+          class="Stat__Container flex items-center justify-around w-[80%] flex-col gap-1"
+        >
+
+          <!-- <p class="text-white" id="rangeHPValue">0</p> -->
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+ 
+
