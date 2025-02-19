@@ -83,9 +83,8 @@ hideLoader();
 async function fetchPokemonData() {
   try {
     const userInputPokemon = document.querySelector("#userInputPokemon").value;
-    const fetchedData = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${userInputPokemon === "" ? alert("Enter Name or Id of a Pokemon") :userInputPokemon.toLowerCase()}`
-    );
+    !userInputPokemon.toLowerCase() ? alert("Enter Name or Id of a Pokemon") : userInputPokemon.toLowerCase();
+    const fetchedData = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInputPokemon}`);
     
     if(!fetchedData.ok){
     alert(`No Pokemon of Name ${userInputPokemon} Found !`)
