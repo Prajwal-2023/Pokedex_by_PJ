@@ -21,6 +21,7 @@ showLoader();
   pokemonName.style.display = 'block';
   pokemonName.style.transition = 'display 1s';
   pokemonName.style.textTransform = 'capitalize';
+  !userInputPokemon ? pokemonName.textContent = `Who's That Pokemon?` :
   pokemonName.textContent = `Who's That Pokemon?`;
  // Image /tag / name
 
@@ -83,8 +84,7 @@ hideLoader();
 async function fetchPokemonData() {
   try {
     const userInputPokemon = document.querySelector("#userInputPokemon").value;
-    !userInputPokemon.toLowerCase() ? alert("Enter Name or Id of a Pokemon") : userInputPokemon.toLowerCase();
-    const fetchedData = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInputPokemon}`);
+    const fetchedData = await fetch(`https://pokeapi.co/api/v2/pokemon/${userInputPokemon.toLowerCase()}`);
     
     if(!fetchedData.ok){
     alert(`No Pokemon of Name ${userInputPokemon} Found !`)
@@ -106,10 +106,11 @@ async function fetchPokemonData() {
     pokemonImage.src = pokeSprite;
     // Sprite / Image
     pokemonImage.onerror = function () {
-      this.src = "./noImage.svg"; // Fallback image
+      this.src = "STATIC/noImage.svg"; // Fallback image
     };
     // #id
     pokemonId.style.display = 'block';
+    !data.id ? pokemonId.textContent = `#?` :
     pokemonId.textContent = `#${data.id}`;
     // name0
     pokemonName.style.display = 'block';
@@ -137,20 +138,18 @@ async function fetchPokemonData() {
   normal: "A8A878"
 };
 
-const typeColor = [];
-pokemonType.innerHTML = "";
-const typeArr = data.types;
-typeArr.forEach((typ) => {
-  const typeName = typ.type.name.toLowerCase(); 
+// Set type & background
+pokemonType.innerHTML = data.types.map(typ => {
+  const typeName = typ.type.name.toLowerCase();
   const color = typeColorMap[typeName] || "A8A878";
-  pokemonImageBackground.style.transition = "background 0.5s ease-in-out";
-  pokemonImageBackground.style.background = `linear-gradient(to right,black, ${color ? `#${color}5a` : "black"}, black)`;
-  pokemonType.innerHTML += `
-    <p class="bg-[#${color}] text-white font-bold rounded-xl py-[0.1rem] w-[5rem] text-center">
-      ${typeName}
-    </p>
-  `;
-});
+  return `<p class="bg-[#${color}] text-white font-bold rounded-xl py-[0.1rem] w-[5rem] text-center">${typeName}</p>`;
+}).join("");
+
+const typeColors = data.types.map(typ => `#${typeColorMap[typ.type.name.toLowerCase()] || "A8A878"}`);
+pokemonImageBackground.style.transition = "background 0.5s ease-in-out";
+pokemonImageBackground.style.background = `linear-gradient(to right, black, ${typeColors.join(",")}, black)`;
+
+
 
     // console.log(typeColor)
     
